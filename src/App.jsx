@@ -3,9 +3,9 @@ import { useState, useEffect, useCallback, useRef } from "react";
 // ── CONFIG — fill these in after setup ─────────────────────────────────────
 const CONFIG = {
   emailjs: {
-    serviceId:  "YOUR_EMAILJS_SERVICE_ID",
-    templateId: "YOUR_EMAILJS_TEMPLATE_ID",
-    publicKey:  "YOUR_EMAILJS_PUBLIC_KEY",
+    serviceId:  "service_kt60qji",
+    templateId: "template_fhjkfwa",
+    publicKey:  "dtkcomOtGXGdWp01E",
   },
   googleSheets: {
     scriptUrl: "https://script.google.com/macros/s/AKfycbyVmHZz0CyPwdUYIfzTkx3xErrSG6rnrUmPOsJjms6ABbufk6cY9V4EhlYDN42obbJlfA/exec",
