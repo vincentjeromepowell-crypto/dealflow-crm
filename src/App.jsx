@@ -71,29 +71,40 @@ const isFuture= (d) => d && d > today();
 // ── EMAIL ──────────────────────────────────────────────────────────────────
 const sendReminderEmail = async (to, toName, property, followUpNote, dueDate) => {
   const { serviceId, templateId, publicKey } = CONFIG.emailjs;
-  if (!serviceId || serviceId === "service_kt60qji") return;
+  if (!serviceId || serviceId === "YOUR_EMAILJS_SERVICE_ID") return;
   try {
-    await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+    const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "origin": "http://localhost",
+      },
       body: JSON.stringify({
-        service_id: serviceId, template_id: templateId, user_id: publicKey,
+        service_id: serviceId,
+        template_id: templateId,
+        user_id: publicKey,
+        accessToken: publicKey,
         template_params: {
-          to_email: to, to_name: toName,
-          property_address: property.address, realtor_name: property.realtorName,
-          follow_up_note: followUpNote, due_date: dueDate,
+          to_email: to,
+          to_name: toName,
+          property_address: property.address || "No address",
+          realtor_name: property.realtorName || "—",
+          follow_up_note: followUpNote,
+          due_date: dueDate,
           stage: STAGES.find(s => s.id === property.stage)?.label || property.stage,
           crm_link: window.location.href,
         },
       }),
     });
-  } catch (e) { console.warn("EmailJS:", e); }
+    const text = await res.text();
+    console.log("EmailJS response:", res.status, text);
+  } catch (e) { console.warn("EmailJS error:", e); }
 };
 
 // ── SHEETS SYNC ────────────────────────────────────────────────────────────
 const syncToSheets = async (data) => {
   const url = CONFIG.googleSheets.scriptUrl;
-  if (!url || url === "https://script.google.com/macros/s/AKfycbyVmHZz0CyPwdUYIfzTkx3xErrSG6rnrUmPOsJjms6ABbufk6cY9V4EhlYDN42obbJlfA/exec") return { ok: false, reason: "not_configured" };
+  if (!url || url === "YOUR_GOOGLE_APPS_SCRIPT_URL") return { ok: false, reason: "not_configured" };
   try {
     const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify({ properties: data.properties, kpis: data.kpis }) });
     const text = await res.text();
