@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 const CONFIG = {
   emailjs: {
     serviceId:  "service_kt60qji",
-    templateId: "template_fhjkfwa",
+    templateId: "template_c1zjtzp",
     publicKey:  "dtkcomOtGXGdWp01E",
   },
   googleSheets: {
