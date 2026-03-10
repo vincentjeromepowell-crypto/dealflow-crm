@@ -8,7 +8,7 @@ const CONFIG = {
     publicKey:  "YOUR_EMAILJS_PUBLIC_KEY",
   },
   googleSheets: {
-    scriptUrl: "YOUR_GOOGLE_APPS_SCRIPT_URL",
+    scriptUrl: "https://script.google.com/macros/s/AKfycbyVmHZz0CyPwdUYIfzTkx3xErrSG6rnrUmPOsJjms6ABbufk6cY9V4EhlYDN42obbJlfA/exec",
   },
   emails: {
     owner: "vince@vppropertypros.com",
