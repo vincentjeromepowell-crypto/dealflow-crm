@@ -71,7 +71,7 @@ const isFuture= (d) => d && d > today();
 // ── EMAIL ──────────────────────────────────────────────────────────────────
 const sendReminderEmail = async (to, toName, property, followUpNote, dueDate) => {
   const { serviceId, templateId, publicKey } = CONFIG.emailjs;
-  if (!serviceId || serviceId === "YOUR_EMAILJS_SERVICE_ID") return;
+  if (!serviceId || serviceId === "service_kt60qji") return;
   try {
     await fetch("https://api.emailjs.com/api/v1.0/email/send", {
       method: "POST",
@@ -93,7 +93,7 @@ const sendReminderEmail = async (to, toName, property, followUpNote, dueDate) =>
 // ── SHEETS SYNC ────────────────────────────────────────────────────────────
 const syncToSheets = async (data) => {
   const url = CONFIG.googleSheets.scriptUrl;
-  if (!url || url === "YOUR_GOOGLE_APPS_SCRIPT_URL") return { ok: false, reason: "not_configured" };
+  if (!url || url === "https://script.google.com/macros/s/AKfycbyVmHZz0CyPwdUYIfzTkx3xErrSG6rnrUmPOsJjms6ABbufk6cY9V4EhlYDN42obbJlfA/exec") return { ok: false, reason: "not_configured" };
   try {
     const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify({ properties: data.properties, kpis: data.kpis }) });
     const text = await res.text();
@@ -594,7 +594,7 @@ Open CRM: {{crm_link}}
             "Click Extensions → Apps Script. Delete all existing code in the editor.",
             "Paste the Apps Script code below, then click the 💾 Save icon.",
             "Click Deploy → New Deployment. Type = Web App. Execute as = Me. Who has access = Anyone. Click Deploy. Copy the URL it gives you.",
-            "Go to your GitHub repo → src/App.jsx → click the pencil (edit) icon. Find: YOUR_GOOGLE_APPS_SCRIPT_URL and replace it with your copied URL. Commit the change.",
+            "Go to your GitHub repo → src/App.jsx → click the pencil (edit) icon. Find: https://script.google.com/macros/s/AKfycbyVmHZz0CyPwdUYIfzTkx3xErrSG6rnrUmPOsJjms6ABbufk6cY9V4EhlYDN42obbJlfA/exec and replace it with your copied URL. Commit the change.",
             "Vercel auto-redeploys in ~60 seconds. Come back to this Setup page and click 'Force Sync Now' to test.",
           ].map((s,i)=>(
             <div key={i} style={S.setupStep}>
@@ -622,7 +622,7 @@ Open CRM: {{crm_link}}
             "Click Email Services → Add New Service → Gmail. Connect vincentjeromepowell@gmail.com. Copy your Service ID.",
             "Click Email Templates → Create New Template. Paste the template text below. Set the 'To Email' field to {{to_email}}. Save. Copy your Template ID.",
             "Click Account (top right) → copy your Public Key.",
-            "Go to GitHub → src/App.jsx → edit. Replace YOUR_EMAILJS_SERVICE_ID, YOUR_EMAILJS_TEMPLATE_ID, and YOUR_EMAILJS_PUBLIC_KEY with your three values. Commit.",
+            "Go to GitHub → src/App.jsx → edit. Replace service_kt60qji, template_fhjkfwa, and dtkcomOtGXGdWp01E with your three values. Commit.",
             "Done — reminders will now email both vince@vppropertypros.com and gary@vppropertypros.com on the due date.",
           ].map((s,i)=>(
             <div key={i} style={S.setupStep}>
